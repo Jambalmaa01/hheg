@@ -1,8 +1,15 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Typography, Stack, Paper } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Typography, Stack, Paper, Button } from "@mui/material";
+import Userform from '../../forms/userFrom/Userform';
 
 export default function UserTable() {
+    onst [showForm, setShowForm] = useState(false);
+
+    const handleToggleForm = () => {
+        setShowForm(!showForm);
+    };
+
     return (
-        <Box sx={{ width: '100%'}}>
+        <Box sx={{ width: '100%', marginTop:5, marginLeft:5}}>
             <Stack
         spacing={1}
         direction={'row'}
@@ -12,7 +19,10 @@ export default function UserTable() {
         <Typography variant='button' fontSize={20} color='primary'>
           Бие бүрэлдэхүүн
         </Typography>
+        <Button onClick={handleToggleForm}>Бүртгэх</Button>
+        
       </Stack>
+      {showForm && <Userform />}
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 600, width:'100%' }}>
                     <Table stickyHeader >
