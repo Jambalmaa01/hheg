@@ -8,22 +8,30 @@ import {
   Paper,
   Alert
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-export default function LoginPage() {
+export default function LoginPage({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!username || !password) {
-      setError('И-мэйл болон нууц үгээ бөглөнө үү.');
+      setError('Нэвтрэх нэр болон нууц үгээ бөглөнө үү.');
       return;
     }
 
-    setError('');
-    console.log('Login:', { username, password });
+    if (username === 'admin' && password === 'admin') {
+      setError('');
+      onLogin(); 
+      navigate('/Home'); 
+      console.log('object')
+    } else {
+      setError('Нэвтрэх нэр эсвэл нууц үг буруу байна.');
+    }
   };
 
   return (

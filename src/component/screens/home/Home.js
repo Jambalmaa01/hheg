@@ -7,6 +7,7 @@
     import PeopleIcon from '@mui/icons-material/People';
     import AttachmentIcon from '@mui/icons-material/Attachment';
     import Tailan from '../../tailan/Tailan';
+    import LoginPage from '../../forms/login/LoginPage'
 
     export default function Home() {
         return (
@@ -66,6 +67,15 @@
                                     startIcon={<AttachmentIcon />}
                                 >
                                     Тайлан
+                                </Button>
+                                <Button
+                                    component={RouterLink}
+                                    to="/Dashboard"
+                                    color="inherit"
+                                    sx={{ width: 240, marginTop: 5, border: 1, borderColor: 'gray', justifyContent: 'flex-start' }}
+                                    startIcon={<LoginPage />}
+                                >
+                                   Гарах
                                 </Button>
                             </Box>
                         </Grid>
