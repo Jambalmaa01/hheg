@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import {
+  TextField,
+  Button,
+  Paper,
+  Grid,
+  Typography,
+  MenuItem,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-function Userfrom() {
+function UserForm() {
   const [huvdugaar, setHuvdugaar] = useState('');
   const [tsol, setTsol] = useState('');
   const [ovog, setOvog] = useState('');
@@ -31,146 +42,91 @@ function Userfrom() {
     });
   };
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
-    <div>
-      <h1>Хувийн мэдээлэл оруулах</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="huvdugaar">Хувийн дугаар:</label>
-          <input
-            type="text"
-            id="huvdugaar"
-            value={huvdugaar}
-            onChange={(e) => setHuvdugaar(e.target.value)}
-            required
-          />
-        </div>
+    <Grid container justifyContent="center" sx={{ mt: 5 }}>
+      <Paper elevation={3} sx={{ p: 4, width: 500 }}>
+        <Typography variant="h5" gutterBottom>
+          Хувийн мэдээлэл оруулах
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Хувийн дугаар" value={huvdugaar} onChange={(e) => setHuvdugaar(e.target.value)} required />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Цол" value={tsol} onChange={(e) => setTsol(e.target.value)} required />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField fullWidth label="Овог" value={ovog} onChange={(e) => setOvog(e.target.value)} required />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField fullWidth label="Нэр" value={ner} onChange={(e) => setNer(e.target.value)} required />
+            </Grid>
 
-        <div>
-          <label htmlFor="tsol">Цол:</label>
-          <input
-            type="text"
-            id="tsol"
-            value={tsol}
-            onChange={(e) => setTsol(e.target.value)}
-            required
-          />
-        </div>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                select
+                label="Хүйс"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                required
+              >
+                <MenuItem value="">Сонгоно уу</MenuItem>
+                <MenuItem value="male">Эр</MenuItem>
+                <MenuItem value="female">Эм</MenuItem>
+                <MenuItem value="other">Бусад</MenuItem>
+              </TextField>
+            </Grid>
 
-        <div>
-          <label htmlFor="ovog">Овог:</label>
-          <input
-            type="text"
-            id="ovog"
-            value={ovog}
-            onChange={(e) => setOvog(e.target.value)}
-            required
-          />
-        </div>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Албан тушаал" value={albanTushaal} onChange={(e) => setAlbanTushaal(e.target.value)} required />
+            </Grid>
 
-        <div>
-          <label htmlFor="ner">Нэр:</label>
-          <input
-            type="text"
-            id="ner"
-            value={ner}
-            onChange={(e) => setNer(e.target.value)}
-            required
-          />
-        </div>
+            <Grid item xs={6}>
+              <TextField fullWidth type="number" label="Ажилласан жил" value={ajilsanJil} onChange={(e) => setAjilsanJil(e.target.value)} required />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField fullWidth type="date" label="Ажилд орсон огноо" value={date} onChange={(e) => setDate(e.target.value)} InputLabelProps={{ shrink: true }} required />
+            </Grid>
 
-        <div>
-          <label htmlFor="gender">Хүйс:</label>
-          <select
-            id="gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            required
-          >
-            <option value="">Сонгоно уу</option>
-            <option value="male">Эр</option>
-            <option value="female">Эм</option>
-            <option value="other">Бусад</option>
-          </select>
-        </div>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Тасаг" value={tasag} onChange={(e) => setTasag(e.target.value)} required />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Нэвтрэх нэр" value={username} onChange={(e) => setUsername(e.target.value)} required />
+            </Grid>
 
-        <div>
-          <label htmlFor="albanTushaal">Албан тушаал:</label>
-          <input
-            type="text"
-            id="albanTushaal"
-            value={albanTushaal}
-            onChange={(e) => setAlbanTushaal(e.target.value)}
-            required
-          />
-        </div>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Нууц үг"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
 
-        <div>
-          <label htmlFor="ajilsanJil">Ажилсан жил:</label>
-          <input
-            type="number"
-            id="ajilsanJil"
-            value={ajilsanJil}
-            onChange={(e) => setAjilsanJil(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="date">Ажилд орсон он сар өдөр:</label>
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="tasag">Тасаг:</label>
-          <input
-            type="text"
-            id="tasag"
-            value={tasag}
-            onChange={(e) => setTasag(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="username">Нэвтрэх нэр:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password">Нууц үг:</label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="button" onClick={toggleShowPassword} style={{ marginLeft: '10px' }}>
-            {showPassword ? 'Нуух' : 'Харах'}
-          </button>
-        </div>
-
-        <button type="submit">Илгээх</button>
-      </form>
-    </div>
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" fullWidth>
+                Хадгалах
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Paper>
+    </Grid>
   );
 }
 
-export default Userfrom;
+export default UserForm;

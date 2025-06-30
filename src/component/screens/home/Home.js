@@ -2,10 +2,11 @@
     import { BrowserRouter, Routes, Route, Link as RouterLink } from 'react-router-dom';
     import FileTable from '../../table/file/FIleTable';
     import UserTable from '../../table/userTable/UserTable';
-    import Dashboard from '../dashboard/Dashboard'
+    import Dashboard from '../dashboard/Dashboard';
     import DashboardIcon from '@mui/icons-material/Dashboard';
     import PeopleIcon from '@mui/icons-material/People';
     import AttachmentIcon from '@mui/icons-material/Attachment';
+    import Tailan from '../../tailan/Tailan';
 
     export default function Home() {
         return (
@@ -57,6 +58,15 @@
                                 >
                                     Файл
                                 </Button>
+                                <Button
+                                    component={RouterLink}
+                                    to="/"
+                                    color="inherit"
+                                    sx={{ width: 240, marginTop: 5, border: 1, borderColor: 'gray', justifyContent: 'flex-start' }}
+                                    startIcon={<AttachmentIcon />}
+                                >
+                                    Тайлан
+                                </Button>
                             </Box>
                         </Grid>
 
@@ -65,6 +75,7 @@
                                 <Route path="/Dashboard" element={<Dashboard />} />
                                 <Route path="/UserTable" element={<UserTable />} />
                                 <Route path="/FileTable" element={<FileTable />} />
+                                <Route path="/Tailan" element={<Tailan />} />
                             </Routes>
                         </Grid>
                     </Grid>
