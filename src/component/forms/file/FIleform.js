@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 function Filefrom() {
     const [huvdugaar, sethuvdugaar] = useState('');
+    const [fileTurul, setFileTurul] = userState('');
     const [file, setFile] = useState(null);
     const [date, setDate]= userState('');
 
@@ -34,6 +35,20 @@ function Filefrom() {
                 onChange={(e) => sethuvdugaar(e.target.value)}
                 required
             />
+        </div>
+        <div>
+            <label htmlFor="fileTurul">Файлын төрөл:</label>
+            <select
+                id="fileTurul"
+                value={fileTurul}
+                onChange={(e) => setFileTurul(e.target.value)}
+                required
+            >
+                <option value="">Сонгоно уу</option>
+                <option value="file">Файл</option>
+                <option value="image">Зураг</option>
+                <option value="other">Бусад</option>
+            </select>
         </div>
         <div>
             <label htmlFor="file">Файл сонгох:</label>
