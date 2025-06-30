@@ -1,325 +1,147 @@
-// import React from 'react';
-// import {
-//   Box,
-//   Card,
-//   CardContent,
-//   Typography,
-//   Grid,
-//   Paper
-// } from '@mui/material';
-// import {
-//   TrendingUp,
-//   People,
-//   ShoppingCart,
-//   BugReport
-// } from '@mui/icons-material';
+import React from 'react';
+import {
+  PieChart, Pie, Cell, Tooltip, Legend,
+  LineChart, Line, XAxis, YAxis, CartesianGrid
+} from 'recharts';
 
-// const MetricCard = ({ title, value, icon, color, bgColor }) => (
-//   <Card sx={{ 
-//     height: '120px',
-//     backgroundColor: bgColor,
-//     border: 'none',
-//     boxShadow: 'none'
-//   }}>
-//     <CardContent sx={{ 
-//       display: 'flex', 
-//       flexDirection: 'column', 
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//       height: '100%',
-//       textAlign: 'center'
-//     }}>
-//       <Box sx={{ 
-//         backgroundColor: 'rgba(255,255,255,0.3)',
-//         borderRadius: '50%',
-//         width: 40,
-//         height: 40,
-//         display: 'flex',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         mb: 1
-//       }}>
-//         {React.cloneElement(icon, { sx: { color: color, fontSize: 20 } })}
-//       </Box>
-//       <Typography variant="h4" sx={{ 
-//         fontWeight: 'bold', 
-//         color: '#333',
-//         mb: 0.5
-//       }}>
-//         {value}
-//       </Typography>
-//       <Typography variant="body2" sx={{ 
-//         color: '#666',
-//         fontSize: '12px'
-//       }}>
-//         {title}
-//       </Typography>
-//     </CardContent>
-//   </Card>
-// );
+import { FaInfoCircle, FaNetworkWired, FaShieldAlt, FaCode } from 'react-icons/fa';
+import { BsSignal } from "react-icons/bs";
+import { RiFolderSettingsFill, RiBaseStationLine } from "react-icons/ri";
 
-// const LineChartPlaceholder = () => (
-//   <Paper sx={{ 
-//     p: 3, 
-//     height: '300px',
-//     display: 'flex',
-//     flexDirection: 'column'
-//   }}>
-//     <Box sx={{ mb: 2 }}>
-//       <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 0.5 }}>
-//         Website Visits
-//       </Typography>
-//       <Typography variant="body2" sx={{ color: '#666' }}>
-//         (+43%) than last year
-//       </Typography>
-//     </Box>
-    
-//     <Box sx={{ 
-//       display: 'flex', 
-//       gap: 2, 
-//       mb: 2,
-//       justifyContent: 'center'
-//     }}>
-//       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-//         <Box sx={{ 
-//           width: 8, 
-//           height: 8, 
-//           borderRadius: '50%', 
-//           backgroundColor: '#4CAF50' 
-//         }} />
-//         <Typography variant="caption">Team A</Typography>
-//       </Box>
-//       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-//         <Box sx={{ 
-//           width: 8, 
-//           height: 8, 
-//           borderRadius: '50%', 
-//           backgroundColor: '#FFC107' 
-//         }} />
-//         <Typography variant="caption">Team B</Typography>
-//       </Box>
-//       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-//         <Box sx={{ 
-//           width: 8, 
-//           height: 8, 
-//           borderRadius: '50%', 
-//           backgroundColor: '#2196F3' 
-//         }} />
-//         <Typography variant="caption">Team C</Typography>
-//       </Box>
-//     </Box>
+const userData = [
+  { type: 'Мэдээлэл технологийн тасаг', count: 25, icon: <FaInfoCircle size={30} /> },
+  { type: 'Холбооны тасаг', count: 35, icon: <FaNetworkWired size={30} /> },
+  { type: 'Кибер аюулгүй байдлын тасаг', count: 20, icon: <FaShieldAlt size={30} /> },
+  { type: 'Программ хангамжийн тасаг', count: 9, icon: <FaCode size={30} /> },
+  { type: 'Дохиолол хяналтын тасаг', count: 13, icon: <BsSignal size={30} /> },
+  { type: 'Засварын тасаг', count: 4, icon: <RiFolderSettingsFill size={30} /> },
+  { type: 'Суурийн зангилаа', count: 4, icon: <RiBaseStationLine size={30} /> },
+];
 
-//     <Box sx={{ 
-//       flex: 1,
-//       display: 'flex',
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//       backgroundColor: '#f8f9fa',
-//       borderRadius: 1,
-//       position: 'relative',
-//       overflow: 'hidden'
-//     }}>
-//       {/* Simulated line chart with CSS */}
-//       <svg width="100%" height="100%" viewBox="0 0 400 150">
-//         {/* Grid lines */}
-//         <defs>
-//           <pattern id="grid" width="40" height="30" patternUnits="userSpaceOnUse">
-//             <path d="M 40 0 L 0 0 0 30" fill="none" stroke="#e0e0e0" strokeWidth="0.5"/>
-//           </pattern>
-//         </defs>
-//         <rect width="100%" height="100%" fill="url(#grid)" />
-        
-//         {/* Team A line (green) */}
-//         <polyline
-//           fill="none"
-//           stroke="#4CAF50"
-//           strokeWidth="2"
-//           points="20,120 60,100 100,80 140,90 180,70 220,60 260,50 300,45 340,40 380,35"
-//         />
-        
-//         {/* Team B line (yellow) */}
-//         <polyline
-//           fill="none"
-//           stroke="#FFC107"
-//           strokeWidth="2"
-//           points="20,100 60,110 100,95 140,105 180,85 220,90 260,75 300,80 340,70 380,65"
-//         />
-        
-//         {/* Team C line (blue) */}
-//         <polyline
-//           fill="none"
-//           stroke="#2196F3"
-//           strokeWidth="2"
-//           points="20,130 60,125 100,115 140,110 180,100 220,95 260,85 300,75 340,65 380,55"
-//         />
-//       </svg>
-//     </Box>
-//   </Paper>
-// );
+const genderData = [
+  { name: 'Male', value: 60 },
+  { name: 'Female', value: 40 },
+];
 
-// const PieChartPlaceholder = () => (
-//   <Paper sx={{ 
-//     p: 3, 
-//     height: '300px',
-//     display: 'flex',
-//     flexDirection: 'column'
-//   }}>
-//     <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 3 }}>
-//       Current Visits
-//     </Typography>
-    
-//     <Box sx={{ 
-//       flex: 1,
-//       display: 'flex',
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//       position: 'relative'
-//     }}>
-//       {/* Simulated pie chart */}
-//       <svg width="200" height="200" viewBox="0 0 200 200">
-//         <circle
-//           cx="100"
-//           cy="100"
-//           r="80"
-//           fill="transparent"
-//           stroke="#f44336"
-//           strokeWidth="40"
-//           strokeDasharray="125.6 251.2"
-//           strokeDashoffset="0"
-//           transform="rotate(-90 100 100)"
-//         />
-//         <circle
-//           cx="100"
-//           cy="100"
-//           r="80"
-//           fill="transparent"
-//           stroke="#4CAF50"
-//           strokeWidth="40"
-//           strokeDasharray="94.2 282.6"
-//           strokeDashoffset="-125.6"
-//           transform="rotate(-90 100 100)"
-//         />
-//         <circle
-//           cx="100"
-//           cy="100"
-//           r="80"
-//           fill="transparent"
-//           stroke="#2196F3"
-//           strokeWidth="40"
-//           strokeDasharray="62.8 314"
-//           strokeDashoffset="-219.8"
-//           transform="rotate(-90 100 100)"
-//         />
-//         <circle
-//           cx="100"
-//           cy="100"
-//           r="80"
-//           fill="transparent"
-//           stroke="#FFC107"
-//           strokeWidth="40"
-//           strokeDasharray="31.4 345.4"
-//           strokeDashoffset="-282.6"
-//           transform="rotate(-90 100 100)"
-//         />
-//       </svg>
-      
-//       {/* Percentage labels */}
-//       <Box sx={{ 
-//         position: 'absolute',
-//         top: '20%',
-//         right: '15%',
-//         color: 'white',
-//         fontWeight: 'bold',
-//         fontSize: '14px'
-//       }}>
-//         38%
-//       </Box>
-//       <Box sx={{ 
-//         position: 'absolute',
-//         bottom: '25%',
-//         right: '25%',
-//         color: 'white',
-//         fontWeight: 'bold',
-//         fontSize: '14px'
-//       }}>
-//         22%
-//       </Box>
-//       <Box sx={{ 
-//         position: 'absolute',
-//         bottom: '30%',
-//         left: '20%',
-//         color: 'white',
-//         fontWeight: 'bold',
-//         fontSize: '14px'
-//       }}>
-//         30%
-//       </Box>
-//       <Box sx={{ 
-//         position: 'absolute',
-//         top: '25%',
-//         left: '30%',
-//         color: 'white',
-//         fontWeight: 'bold',
-//         fontSize: '14px'
-//       }}>
-//         10%
-//       </Box>
-//     </Box>
-//   </Paper>
-// );
+const lineData = [
+  { month: 'Jan', users: 30 },
+  { month: 'Feb', users: 45 },
+  { month: 'Mar', users: 60 },
+  { month: 'Apr', users: 55 },
+  { month: 'May', users: 70 },
+  { month: 'Jun', users: 75 },
+];
 
-// export default function Dashboard() {
-//   const metrics = [
-//     {
-//       title: 'Weekly Sales',
-//       value: '714k',
-//       icon: <TrendingUp />,
-//       color: '#2e7d32',
-//       bgColor: '#c8e6c9'
-//     },
-//     {
-//       title: 'New Users',
-//       value: '1.35m',
-//       icon: <People />,
-//       color: '#1565c0',
-//       bgColor: '#bbdefb'
-//     },
-//     {
-//       title: 'Item Orders',
-//       value: '172m',
-//       icon: <ShoppingCart />,
-//       color: '#ef6c00',
-//       bgColor: '#ffe0b2'
-//     },
-//     {
-//       title: 'Bug Reports',
-//       value: '234',
-//       icon: <BugReport />,
-//       color: '#c62828',
-//       bgColor: '#ffcdd2'
-//     }
-//   ];
+const GENDER_COLORS = ['#8884d8', '#82ca9d'];
+const USER_COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA66CC', '#FF4444', '#00BFA5'];
 
-//   return (
-//     <Box sx={{ p: 3 }}>
-//       {/* Metric Cards */}
-//       <Grid container spacing={3} sx={{ mb: 4 }}>
-//         {metrics.map((metric, index) => (
-//           <Grid item xs={12} sm={6} md={3} key={index}>
-//             <MetricCard {...metric} />
-//           </Grid>
-//         ))}
-//       </Grid>
+export default function Dashboard() {
+  return (
+    <div style={{ padding: 20, maxWidth: '100%', boxSizing: 'border-box' }}>
+      <h2>Тасаг албад</h2>
 
-//       {/* Charts */}
-//       <Grid container spacing={3}>
-//         <Grid item xs={12} md={8}>
-//           <LineChartPlaceholder />
-//         </Grid>
-//         <Grid item xs={12} md={4}>
-//           <PieChartPlaceholder />
-//         </Grid>
-//       </Grid>
-//     </Box>
-//   );
-// }
+      <div style={{
+        display: 'flex',
+        gap: 20,
+        marginBottom: 40,
+        flexWrap: 'wrap',
+        justifyContent: 'space-between'
+      }}>
+        {userData.map(({ type, count, icon }, idx) => (
+          <div
+            key={type}
+            className="hover-card"
+            style={{
+              border: `2px solid ${USER_COLORS[idx % USER_COLORS.length]}`,
+              borderRadius: 10,
+              padding: 20,
+              width: 160,
+              height: 140,
+              textAlign: 'center',
+              boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+              fontWeight: '600',
+              cursor: 'pointer',
+              backgroundColor: '#f9f9f9',
+              color: USER_COLORS[idx % USER_COLORS.length],
+              flexShrink: 0,
+              transition: 'all 0.3s ease',
+              transform: 'scale(1)',
+            }}
+          >
+            <div style={{ marginBottom: 10 }}>{icon}</div>
+            <div style={{ fontSize: 16 }}>{type}</div>
+            <div style={{ fontSize: 24, marginTop: 8 }}>{count}</div>
+          </div>
+        ))}
+      </div>
+
+      <h2>Хүйсийн харьцаа ба Сарын хэрэглэгчдийн өсөлт</h2>
+      <div style={{
+        display: 'flex',
+        gap: 40,
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+      }}>
+        <div style={{
+          flex: '1 1 400px',
+          height: 300,
+          boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+          borderRadius: 10,
+          backgroundColor: '#fff',
+          padding: 10,
+        }}>
+          <PieChart width={400} height={300}>
+            <Pie
+              data={genderData}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              fill="#8884d8"
+              label
+            >
+              {genderData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={GENDER_COLORS[index % GENDER_COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </div>
+        <div style={{
+          flex: '1 1 500px',
+          height: 300,
+          boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+          borderRadius: 10,
+          backgroundColor: '#fff',
+          padding: 10,
+        }}>
+          <LineChart
+            width={500}
+            height={300}
+            data={lineData}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="users" stroke="#8884d8" activeDot={{ r: 8 }} />
+          </LineChart>
+        </div>
+      </div>
+      <style>
+        {`
+          .hover-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 1;
+          }
+        `}
+      </style>
+    </div>
+  );
+}
