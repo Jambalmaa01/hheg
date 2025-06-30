@@ -76,63 +76,70 @@ export default function Dashboard() {
       </div>
 
       <h2>Хүйсийн харьцаа ба Сарын хэрэглэгчдийн өсөлт</h2>
-      <div style={{
-        display: 'flex',
-        gap: 40,
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-      }}>
-        <div style={{
-          flex: '1 1 400px',
-          height: 300,
-          boxShadow: '0 0 8px rgba(0,0,0,0.1)',
-          borderRadius: 10,
-          backgroundColor: '#fff',
-          padding: 10,
-        }}>
-          <PieChart width={400} height={300}>
-            <Pie
-              data={genderData}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={100}
-              fill="#8884d8"
-              label
-            >
-              {genderData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={GENDER_COLORS[index % GENDER_COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </div>
-        <div style={{
-          flex: '1 1 500px',
-          height: 300,
-          boxShadow: '0 0 8px rgba(0,0,0,0.1)',
-          borderRadius: 10,
-          backgroundColor: '#fff',
-          padding: 10,
-        }}>
-          <LineChart
-            width={500}
-            height={300}
-            data={lineData}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="users" stroke="#8884d8" activeDot={{ r: 8 }} />
-          </LineChart>
-        </div>
-      </div>
+<div style={{
+  display: 'flex',
+  gap: 40,
+  alignItems: 'center',
+  flexWrap: 'wrap',
+  justifyContent: 'center', // << Төвд байршуулалт
+}}>
+  <div style={{
+    flex: '1 1 400px',
+    height: 300,
+    boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}>
+    <PieChart width={400} height={300}>
+      <Pie
+        data={genderData}
+        dataKey="value"
+        nameKey="name"
+        cx="50%"
+        cy="50%"
+        outerRadius={100}
+        fill="#8884d8"
+        label
+      >
+        {genderData.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={GENDER_COLORS[index % GENDER_COLORS.length]} />
+        ))}
+      </Pie>
+      <Tooltip />
+      <Legend />
+    </PieChart>
+  </div>
+
+  <div style={{
+    flex: '1 1 500px',
+    height: 300,
+    boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}>
+    <LineChart
+      width={500}
+      height={300}
+      data={lineData}
+      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="month" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="users" stroke="#8884d8" activeDot={{ r: 8 }} />
+    </LineChart>
+  </div>
+</div>
       <style>
         {`
           .hover-card:hover {
