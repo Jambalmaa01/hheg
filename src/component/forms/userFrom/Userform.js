@@ -5,6 +5,7 @@ function Userfrom() {
     const [tsol, setTsol] = useState('');
     const [ovog, setOvog] = useState('');
     const [ner, setNer] = useState('');
+    const [gender, setGender] = useState('');
     const [albanTushaal, setAlbanTushaal] = useState('');
     const [ajilsanJil, setAjilsanJil] = useState('');
     const [date, setDate]= userState('');
@@ -59,6 +60,20 @@ function Userfrom() {
             onChange={(e) => setNer(e.target.value)}
             required
             />
+        </div>
+        <div>
+            <label htmlFor="gender">Хүйс:</label>
+            <select
+                id="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                required
+            >
+                <option value="">Сонгоно уу</option>
+                <option value="male">Эр</option>
+                <option value="female">Эм</option>
+                <option value="other">Бусад</option>
+            </select>
         </div>
         <div>
             <label htmlFor="albanTushaal">Албан тушаал:</label>
