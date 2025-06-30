@@ -1,11 +1,21 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Typography, Stack, Paper } from "@mui/material";
 
 export default function UserTable() {
     return (
-        <Box>
-            <Box>
-                <TableContainer>
-                    <Table>
+        <Box sx={{ width: '100%'}}>
+            <Stack
+        spacing={1}
+        direction={'row'}
+        alignItems={'center'}
+        justifyContent={'space-between'}
+      >
+        <Typography variant='button' fontSize={20} color='primary'>
+          Бие бүрэлдэхүүн
+        </Typography>
+      </Stack>
+            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                <TableContainer sx={{ maxHeight: 600, width:'100%' }}>
+                    <Table stickyHeader >
                         <TableHead>
                             <TableRow>
                                 <TableCell>Хувийн дугаар</TableCell>
@@ -34,7 +44,7 @@ export default function UserTable() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </Box>
+            </Paper>
         </Box>
     );
 }
