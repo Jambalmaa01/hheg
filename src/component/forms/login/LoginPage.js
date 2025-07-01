@@ -27,7 +27,7 @@ export default function LoginPage({ onLogin }) {
     if (username === 'admin' && password === 'admin') {
       setError('');
       onLogin(); 
-      navigate('/Home'); 
+      // navigate(`/Home`); 
       console.log('object')
     } else {
       setError('Нэвтрэх нэр эсвэл нууц үг буруу байна.');
